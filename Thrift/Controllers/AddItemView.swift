@@ -11,7 +11,7 @@ import CoreData
 
 class AddItemView : ViewController {
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var expenses = [Expense]()
     
     let categories = ["Food", "Auto", "Clothing", "Leisure", "Utilities", "Misc"]
@@ -48,7 +48,7 @@ class AddItemView : ViewController {
         expenses.append(newExpense)
         saveExpense()
         loadExpenses()
-        expensesViewController.performSegue(withIdentifier: "expenseSegue", sender: self)
+        //expensesViewController.performSegue(withIdentifier: "expenseSegue", sender: self)
     }
     
     
@@ -60,7 +60,7 @@ class AddItemView : ViewController {
         }
     }
     
-    func loadExpenses(with request : NSFetchRequest<Expense> = Expense.fetchRequest()){
+    override func loadExpenses(with request : NSFetchRequest<Expense> = Expense.fetchRequest()){
         do {
             expenses = try context.fetch(request)
             for expense in expenses {
@@ -132,9 +132,10 @@ extension AddItemView : UIPickerViewDelegate, UIPickerViewDataSource {
     
     // MARK: - Segue: Pass Context to ExpenseViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "expenseSegue" {
-            let vc = segue.destination as! ExpensesViewController
-            vc.context = context
+        if segue.identifier == "chartsSegue" {
+            let vc = segue.destination as! ViewController
+            vc.vcContext = context
+            
         }
     }
 }

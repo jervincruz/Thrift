@@ -13,11 +13,17 @@ class ExpensesViewController : ViewController, UITableViewDataSource, UITableVie
     
     var context : NSManagedObjectContext?
     var currentContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
     var expenses = [Expense]()
     
-    @IBOutlet weak var expensesTableView: UITableView!
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    let days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+    let years = [2018, 2019, 2020, 2021, 2022]
     
+    var selectedMonth = ""
+    var selectedDay = 0
+    var selectedYear = 0
+    
+    @IBOutlet weak var expensesTableView: UITableView!
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -34,7 +40,7 @@ class ExpensesViewController : ViewController, UITableViewDataSource, UITableVie
         }
     }
     
-    func loadExpenses(with request : NSFetchRequest<Expense> = Expense.fetchRequest()){
+    override func loadExpenses(with request : NSFetchRequest<Expense> = Expense.fetchRequest()){
         do {
             context = context == nil ? currentContext : context!
             expenses = (try context?.fetch(request))!
@@ -62,7 +68,14 @@ class ExpensesViewController : ViewController, UITableViewDataSource, UITableVie
         let day = String(expenses[indexPath.row].day)
         let year = String(expenses[indexPath.row].year)
         
+        if selectedMonth != "" && selectedDay != 0 && selectedYear != 0 {
+            if month == selectedMonth && day == String(selectedDay) && year == String(selectedYear) {
+                        cell.textLabel?.text = "\(String(describing: category)) \(String(describing: name)) \(String(describing: price)) \(month)/\(day)/\(year)/"
+            }
+        }
+        else {
         cell.textLabel?.text = "\(String(describing: category)) \(String(describing: name)) \(String(describing: price)) \(month)/\(day)/\(year)/"
+        }
         return cell
     }
     
@@ -74,7 +87,55 @@ class ExpensesViewController : ViewController, UITableViewDataSource, UITableVie
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    @IBAction func submitDate(_ sender: Any) {
+        expensesTableView.reloadData()
+        super.viewDidLoad()
+    }
+}
+
+extension ExpensesViewController : UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 3
+    }
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch component {
+        case 0:
+            return 12
+        case 1:
+            return 31
+        case 2:
+            return 5
+        default:
+            return 0
+        }
+    }
     
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch component {
+        case 0:
+            return months[row]
+        case 1:
+            return String(days[row])
+        case 2:
+            return String(years[row])
+        default:
+            return ""
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch component {
+        case 0:
+            selectedMonth = months[row]
+        case 1:
+            selectedDay = days[row]
+        case 2:
+            selectedYear = years[row]
+        default:
+            return
+        }
+    }
     
 }
+
