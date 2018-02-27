@@ -8,17 +8,10 @@
 
 import UIKit
 import CoreData
-import Charts
+import CircleProgressView
 
 class ViewController: UIViewController {
-    
-    @IBOutlet weak var foodChart: PieChartView!
-    @IBOutlet weak var autoChart: PieChartView!
-    @IBOutlet weak var utilitiesChart: PieChartView!
-    @IBOutlet weak var clothingChart: PieChartView!
-    @IBOutlet weak var leisureChart: PieChartView!
-    @IBOutlet weak var miscChart: PieChartView!
-    
+
     var food = 0.0
     var auto = 0.0
     var utilities = 0.0
@@ -30,12 +23,20 @@ class ViewController: UIViewController {
     var vcContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     var vcExpenses = [Expense]()
-
+    
+    @IBOutlet weak var foodChart: CircleProgressView!
+    @IBOutlet weak var autoChart: CircleProgressView!
+    @IBOutlet weak var utilitiesChart: CircleProgressView!
+    @IBOutlet weak var clothingChart: CircleProgressView!
+    @IBOutlet weak var leisureChart : CircleProgressView!
+    @IBOutlet weak var miscChart: CircleProgressView!
+    
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         loadExpenses()
-    
+        
+        foodChart.setProgress(0.5, animated: true)
     }
     
     func loadExpenses(with request : NSFetchRequest<Expense> = Expense.fetchRequest()){
@@ -82,7 +83,7 @@ class ViewController: UIViewController {
         let clothingOffset = total - clothing
         let leisureOffset = total - leisure
         let miscOffset = total - misc
-
+/*
         let foodEntry = PieChartDataEntry(value: Double(food), label: "Food")
         let foodEntry2 = PieChartDataEntry(value: Double(foodOffset), label: "")
 
@@ -155,6 +156,7 @@ class ViewController: UIViewController {
         clothingChart.notifyDataSetChanged()
         leisureChart.notifyDataSetChanged()
         miscChart.notifyDataSetChanged()
+ */
     }
 
     

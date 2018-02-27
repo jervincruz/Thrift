@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ojy-3y-Cag">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Overview View Controller-->
+        <scene sceneID="s8h-c5-NEh">
+            <objects>
+                <viewController id="lgd-SN-EUb" customClass="OverviewViewController" customModule="Thrift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="I1B-bd-feg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oXh-1c-dTE" customClass="BarChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="203" width="375" height="375"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="5gI-JH-vTG"/>
+                    </view>
+                    <connections>
+                        <outlet property="barChartView" destination="oXh-1c-dTE" id="tCx-2P-GAk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y4N-2B-Vnb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3358" y="63"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -24,48 +50,170 @@
                                 <color key="barTintColor" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Thrift" id="JBx-zD-gOL">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="gk8-0d-RGa">
-                                            <connections>
-                                                <segue destination="CfF-BS-nfR" kind="show" id="PCw-td-gao"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Upf-46-1Vw">
-                                            <connections>
-                                                <segue destination="sWH-9L-iEL" kind="show" id="DIF-Fd-lfa"/>
-                                            </connections>
-                                        </barButtonItem>
+                                        <leftBarButtonItems>
+                                            <barButtonItem systemItem="add" id="Upf-46-1Vw">
+                                                <connections>
+                                                    <segue destination="sWH-9L-iEL" kind="show" id="DIF-Fd-lfa"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="&lt;" id="JvF-yj-yCA">
+                                                <connections>
+                                                    <segue destination="Hia-ni-Myu" kind="show" id="JIP-we-xXj"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </leftBarButtonItems>
+                                        <rightBarButtonItems>
+                                            <barButtonItem systemItem="search" id="gk8-0d-RGa">
+                                                <connections>
+                                                    <segue destination="CfF-BS-nfR" kind="show" id="PCw-td-gao"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Categories" id="hRP-j7-Y27">
+                                                <connections>
+                                                    <segue destination="Ojy-3y-Cag" kind="show" id="5kY-yv-P1C"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7KR-VH-kAu" customClass="PieChartView" customModule="Charts">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7KR-VH-kAu" customClass="CircleProgressView" customModule="CircleProgressView">
                                 <rect key="frame" x="0.0" y="84" width="125" height="116"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
+                                        <color key="value" red="0.67523918077186373" green="0.49196678178628905" blue="0.89464515450000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackBorderColor">
+                                        <color key="value" red="0.67523918080000001" green="0.49196678179999997" blue="0.89464515450000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EBy-gS-kjT" customClass="PieChartView" customModule="Charts">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EBy-gS-kjT" customClass="CircleProgressView" customModule="CircleProgressView">
                                 <rect key="frame" x="125" y="84" width="125" height="116"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
+                                        <color key="value" red="0.67523918077186373" green="0.49196678178628905" blue="0.89464515450000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                        <real key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackBorderColor">
+                                        <color key="value" red="0.67523918080000001" green="0.49196678179999997" blue="0.89464515450000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ycg-0P-IT6" customClass="PieChartView" customModule="Charts">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ycg-0P-IT6" customClass="CircleProgressView" customModule="CircleProgressView">
                                 <rect key="frame" x="250" y="84" width="125" height="116"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
+                                        <color key="value" red="0.67523918077186373" green="0.49196678178628905" blue="0.89464515450000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                        <real key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackBorderColor">
+                                        <color key="value" red="0.67523918080000001" green="0.49196678179999997" blue="0.89464515450000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c7e-U0-hZR" customClass="PieChartView" customModule="Charts">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c7e-U0-hZR" customClass="CircleProgressView" customModule="CircleProgressView">
                                 <rect key="frame" x="0.0" y="198" width="125" height="116"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
+                                        <color key="value" red="0.67523918077186373" green="0.49196678178628905" blue="0.89464515450000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                        <real key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackBorderColor">
+                                        <color key="value" red="0.67523918080000001" green="0.49196678179999997" blue="0.89464515450000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oph-WT-KEY" customClass="PieChartView" customModule="Charts">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oph-WT-KEY" customClass="CircleProgressView" customModule="CircleProgressView">
                                 <rect key="frame" x="125" y="198" width="125" height="116"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
+                                        <color key="value" red="0.67523918077186373" green="0.49196678178628905" blue="0.89464515450000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                        <real key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackBorderColor">
+                                        <color key="value" red="0.67523918080000001" green="0.49196678179999997" blue="0.89464515450000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7QG-ta-jh6" customClass="PieChartView" customModule="Charts">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7QG-ta-jh6" customClass="CircleProgressView" customModule="CircleProgressView">
                                 <rect key="frame" x="250" y="198" width="125" height="116"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
+                                        <color key="value" red="0.67523918077186373" green="0.49196678178628905" blue="0.89464515450000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                        <real key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackBorderColor">
+                                        <color key="value" red="0.67523918080000001" green="0.49196678179999997" blue="0.89464515450000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Expenses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7A-2L-hgW">
                                 <rect key="frame" x="151" y="459" width="74" height="21"/>
@@ -94,17 +242,114 @@
                     </view>
                     <navigationItem key="navigationItem" id="7TE-JA-8GE"/>
                     <connections>
-                        <outlet property="autoChart" destination="EBy-gS-kjT" id="FER-8l-W49"/>
-                        <outlet property="clothingChart" destination="c7e-U0-hZR" id="JRX-bx-LKa"/>
-                        <outlet property="foodChart" destination="7KR-VH-kAu" id="jtA-N4-bAi"/>
-                        <outlet property="leisureChart" destination="oph-WT-KEY" id="xI2-f4-Q1P"/>
-                        <outlet property="miscChart" destination="7QG-ta-jh6" id="x4V-NX-SXw"/>
-                        <outlet property="utilitiesChart" destination="Ycg-0P-IT6" id="q5d-je-Oq5"/>
+                        <outlet property="autoChart" destination="EBy-gS-kjT" id="zjB-pg-WZz"/>
+                        <outlet property="clothingChart" destination="c7e-U0-hZR" id="Tnr-No-b82"/>
+                        <outlet property="foodChart" destination="7KR-VH-kAu" id="Pc2-QY-wVr"/>
+                        <outlet property="leisureChart" destination="oph-WT-KEY" id="uAs-sT-DQy"/>
+                        <outlet property="miscChart" destination="7QG-ta-jh6" id="emB-AO-4aT"/>
+                        <outlet property="utilitiesChart" destination="Ycg-0P-IT6" id="dHI-WY-iSI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="711.20000000000005" y="63.418290854572717"/>
+            <point key="canvasLocation" x="26" y="50"/>
+        </scene>
+        <!--Calendar Delegate-->
+        <scene sceneID="fr1-fr-z2P">
+            <objects>
+                <viewController id="Hia-ni-Myu" customClass="CVCalendarViewController" customModule="Thrift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Jq-hr-NN8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GK6-yW-Z77">
+                                <rect key="frame" x="0.0" y="29" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="7Dw-cF-cip"/>
+                                    <constraint firstAttribute="width" constant="375" id="p2c-t4-NJt"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Records" id="0bP-UG-Qve">
+                                        <barButtonItem key="rightBarButtonItem" title="&gt;" id="Toz-2r-Erf">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="Kf6-yu-PQ2"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u0U-0E-oCv">
+                                <rect key="frame" x="0.0" y="411" width="375" height="256"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecordsCell" id="eFh-Cr-7Wg">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eFh-Cr-7Wg" id="V79-zO-sDS">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Hia-ni-Myu" id="XGe-9U-0Q4"/>
+                                    <outlet property="delegate" destination="Hia-ni-Myu" id="twZ-cD-CzK"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiS-4F-QGX" customClass="CVCalendarMenuView" customModule="CVCalendar">
+                                <rect key="frame" x="0.0" y="73" width="375" height="50"/>
+                                <color key="backgroundColor" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="XzL-3Q-5Uv"/>
+                                    <constraint firstAttribute="height" constant="50" id="mRG-aq-43n"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="menuViewDelegate" destination="Hia-ni-Myu" id="rEJ-Py-QdI"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KwW-qm-0Fn" customClass="CVCalendarView" customModule="CVCalendar">
+                                <rect key="frame" x="0.0" y="131" width="375" height="254"/>
+                                <color key="backgroundColor" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="e4j-h3-bkg"/>
+                                    <constraint firstAttribute="height" constant="254" id="rTR-bt-1qt"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="calendarDelegate" destination="Hia-ni-Myu" id="WYq-H8-sew"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="GK6-yW-Z77" firstAttribute="leading" secondItem="Ae3-gF-sJ9" secondAttribute="leading" id="1Tt-ix-MpW"/>
+                            <constraint firstItem="KwW-qm-0Fn" firstAttribute="trailing" secondItem="Ae3-gF-sJ9" secondAttribute="trailing" id="94D-Z0-Aqa"/>
+                            <constraint firstItem="Ae3-gF-sJ9" firstAttribute="bottom" secondItem="KwW-qm-0Fn" secondAttribute="bottom" constant="282" id="APO-ME-hRS"/>
+                            <constraint firstItem="eiS-4F-QGX" firstAttribute="top" secondItem="GK6-yW-Z77" secondAttribute="bottom" id="CKZ-lO-Qsb"/>
+                            <constraint firstItem="GK6-yW-Z77" firstAttribute="top" secondItem="Ae3-gF-sJ9" secondAttribute="top" constant="9" id="CPN-jg-AOI"/>
+                            <constraint firstItem="eiS-4F-QGX" firstAttribute="top" secondItem="GK6-yW-Z77" secondAttribute="bottom" id="Cmy-5G-XKu"/>
+                            <constraint firstItem="eiS-4F-QGX" firstAttribute="trailing" secondItem="Ae3-gF-sJ9" secondAttribute="trailing" id="IFy-lO-GWu"/>
+                            <constraint firstItem="GK6-yW-Z77" firstAttribute="trailing" secondItem="Ae3-gF-sJ9" secondAttribute="trailing" id="OuZ-Eu-E4U"/>
+                            <constraint firstItem="KwW-qm-0Fn" firstAttribute="top" secondItem="eiS-4F-QGX" secondAttribute="bottom" constant="8" id="Uo7-GH-jE3"/>
+                            <constraint firstItem="KwW-qm-0Fn" firstAttribute="leading" secondItem="Ae3-gF-sJ9" secondAttribute="leading" id="fSb-bw-bi0"/>
+                            <constraint firstItem="KwW-qm-0Fn" firstAttribute="top" secondItem="eiS-4F-QGX" secondAttribute="bottom" constant="8" id="fdk-Ag-dqa"/>
+                            <constraint firstItem="KwW-qm-0Fn" firstAttribute="top" secondItem="eiS-4F-QGX" secondAttribute="bottom" constant="8" id="g5y-xu-CSJ"/>
+                            <constraint firstItem="KwW-qm-0Fn" firstAttribute="leading" secondItem="Ae3-gF-sJ9" secondAttribute="leading" id="ksb-aN-52f"/>
+                            <constraint firstItem="Ae3-gF-sJ9" firstAttribute="bottom" secondItem="KwW-qm-0Fn" secondAttribute="bottom" constant="282" id="m6Z-Zs-nSq"/>
+                            <constraint firstItem="KwW-qm-0Fn" firstAttribute="trailing" secondItem="Ae3-gF-sJ9" secondAttribute="trailing" id="nhL-Dg-UlB"/>
+                            <constraint firstItem="eiS-4F-QGX" firstAttribute="leading" secondItem="Ae3-gF-sJ9" secondAttribute="leading" id="xeR-z5-z73"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ae3-gF-sJ9"/>
+                    </view>
+                    <connections>
+                        <outlet property="calendarView" destination="KwW-qm-0Fn" id="dXQ-F4-8Sh"/>
+                        <outlet property="menuView" destination="eiS-4F-QGX" id="GGb-LT-rfA"/>
+                        <outlet property="recordsTableView" destination="u0U-0E-oCv" id="k6W-yG-Dg3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pgu-nm-xV7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-791.20000000000005" y="371.96401799100454"/>
         </scene>
         <!--Categories View Controller-->
         <scene sceneID="alN-Q7-4Wl">
@@ -115,7 +360,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dtf-z8-ojI">
-                                <rect key="frame" x="0.0" y="162" width="375" height="32"/>
+                                <rect key="frame" x="0.0" y="320" width="375" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
@@ -127,11 +372,11 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Jzl-sS-ORu">
-                                <rect key="frame" x="0.0" y="193" width="375" height="145"/>
+                                <rect key="frame" x="0.0" y="351" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p8b-9R-cLg">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoryItemCell" id="rc2-1U-wYG">
@@ -151,18 +396,26 @@
                                     </tableView>
                                 </subviews>
                             </stackView>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eQE-9V-8qF">
+                                <rect key="frame" x="0.0" y="199" width="375" height="101"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ojy-3y-Cag" id="Dbo-QT-rWD"/>
+                                    <outlet property="delegate" destination="Ojy-3y-Cag" id="63N-1t-z00"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="xQm-3C-kka"/>
                     </view>
                     <connections>
+                        <outlet property="datePicker" destination="eQE-9V-8qF" id="Nyh-n1-nIm"/>
                         <outlet property="expensesInCategory" destination="p8b-9R-cLg" id="15d-Vc-VYV"/>
-                        <segue destination="BYZ-38-t0r" kind="show" id="NRR-zr-2Kj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IN8-mO-mUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5.5999999999999996" y="26.53673163418291"/>
+            <point key="canvasLocation" x="1130" y="50"/>
         </scene>
         <!--Add Item View-->
         <scene sceneID="mhz-T8-aIK">
@@ -213,7 +466,7 @@
                                 </connections>
                             </button>
                             <pickerView tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I2q-z0-LG1">
-                                <rect key="frame" x="60" y="118" width="139" height="49"/>
+                                <rect key="frame" x="26" y="98" width="150" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="sWH-9L-iEL" id="ke0-25-PTr"/>
@@ -221,7 +474,7 @@
                                 </connections>
                             </pickerView>
                             <pickerView tag="2" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mWo-54-lIj">
-                                <rect key="frame" x="197" y="118" width="35" height="49"/>
+                                <rect key="frame" x="184" y="98" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="sWH-9L-iEL" id="T02-lo-akD"/>
@@ -229,7 +482,7 @@
                                 </connections>
                             </pickerView>
                             <pickerView tag="3" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hj6-R5-Oxc">
-                                <rect key="frame" x="231" y="118" width="80" height="49"/>
+                                <rect key="frame" x="242" y="98" width="97" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="sWH-9L-iEL" id="GsN-b1-Y3p"/>
@@ -241,13 +494,16 @@
                         <viewLayoutGuide key="safeArea" id="Jue-xa-RKD"/>
                     </view>
                     <connections>
+                        <outlet property="dayPicker" destination="mWo-54-lIj" id="ElQ-nu-FxQ"/>
+                        <outlet property="monthPicker" destination="I2q-z0-LG1" id="OhH-Hk-nM8"/>
                         <outlet property="nameTextField" destination="dNy-vL-4vp" id="3kw-4E-MT9"/>
                         <outlet property="priceTextField" destination="7dh-6S-mzC" id="tWS-M1-6R9"/>
+                        <outlet property="yearPicker" destination="hj6-R5-Oxc" id="60J-AF-sE7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h56-JT-de3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1476" y="63"/>
+            <point key="canvasLocation" x="1862" y="50"/>
         </scene>
         <!--Expenses View Controller-->
         <scene sceneID="ExX-4J-XqQ">
@@ -339,11 +595,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KrF-mP-1td" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2276" y="62.518740629685162"/>
+            <point key="canvasLocation" x="2666" y="63"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="PCw-td-gao"/>
-        <segue reference="NRR-zr-2Kj"/>
+        <segue reference="Kf6-yu-PQ2"/>
     </inferredMetricsTieBreakers>
 </document>

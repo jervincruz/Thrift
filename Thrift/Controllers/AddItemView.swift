@@ -27,16 +27,17 @@ class AddItemView : ViewController {
     var expensesViewController = ExpensesViewController()
     
     // Outlets
-    
+    @IBOutlet weak var monthPicker: UIPickerView!
+    @IBOutlet weak var dayPicker: UIPickerView!
+    @IBOutlet weak var yearPicker: UIPickerView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var priceTextField: UITextField!
+    
     
     @IBAction func addExpense(_ sender: Any) {
         
         let name = nameTextField.text!
         let price = Double(priceTextField.text!)!
-        
-        
         let newExpense = Expense(context: context) // Create new Expense Object with context
         newExpense.name = name
         newExpense.price = price
@@ -44,13 +45,34 @@ class AddItemView : ViewController {
         newExpense.month = Int16(selectedMonth)
         newExpense.day = Int16(selectedDay)
         newExpense.year = Int16(selectedYear)
-        
+        newExpense.date = saveDate()
         expenses.append(newExpense)
+        
+        print(newExpense.date!)
+        
         saveExpense()
         loadExpenses()
-        //expensesViewController.performSegue(withIdentifier: "expenseSegue", sender: self)
     }
     
+    override func viewDidLoad(){
+        let date = Date()
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        
+        print("\(month)/\(day)/\(year)")
+        
+        // If user chooses current date & category
+        selectedCategory = "Food"
+        selectedMonth = month
+        selectedDay = day
+        selectedYear = year
+
+        monthPicker.selectRow(month - 1, inComponent: 0, animated: true)
+        dayPicker.selectRow(day - 1, inComponent: 0, animated: true)
+        yearPicker.selectRow(0, inComponent: 0, animated: true)
+    }
     
     func saveExpense(){
         do {
@@ -71,6 +93,41 @@ class AddItemView : ViewController {
         } catch {
             print("Error fetching data from context \(error)")
         }
+    }
+    
+    func saveDate() -> String {
+        var month : String = ""
+        var completeDate : String = ""
+        switch selectedMonth {
+        case 1:
+            month = "January"
+        case 2:
+            month = "February"
+        case 3:
+            month = "March"
+        case 4:
+            month = "April"
+        case 5:
+            month = "May"
+        case 6:
+            month = "June"
+        case 7:
+            month = "July"
+        case 8:
+            month = "August"
+        case 9:
+            month = "September"
+        case 10:
+            month = "October"
+        case 11:
+            month = "November"
+        case 12:
+            month = "December"
+        default:
+            month = "January"
+        }
+        completeDate = "\(selectedDay) \(month), \(selectedYear)"
+        return completeDate
     }
     
 }
@@ -138,4 +195,5 @@ extension AddItemView : UIPickerViewDelegate, UIPickerViewDataSource {
             
         }
     }
+
 }

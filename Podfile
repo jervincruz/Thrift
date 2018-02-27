@@ -7,5 +7,7 @@ target 'Thrift' do
 
   # Pods for Thrift
 	pod 'Charts'
+	pod 'CVCalendar'
+	pod 'CircleProgressView'
 
 end

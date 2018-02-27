@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		615AFC99D6BF5236E65A2027 /* Pods_Thrift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 809542957636954DFAEE6F43 /* Pods_Thrift.framework */; };
+		E202C710204469DB00E93709 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202C70F204469DB00E93709 /* OverviewViewController.swift */; };
+		E202C7122044C90500E93709 /* CVCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202C7112044C90500E93709 /* CVCalendarViewController.swift */; };
 		E246335C203C721B00ED33DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246335B203C721B00ED33DC /* AppDelegate.swift */; };
 		E246335E203C721B00ED33DC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246335D203C721B00ED33DC /* ViewController.swift */; };
 		E2463361203C721B00ED33DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E246335F203C721B00ED33DC /* Main.storyboard */; };
@@ -22,6 +24,8 @@
 /* Begin PBXFileReference section */
 		64A814890C871C37471A0849 /* Pods-Thrift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thrift.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thrift/Pods-Thrift.release.xcconfig"; sourceTree = "<group>"; };
 		809542957636954DFAEE6F43 /* Pods_Thrift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thrift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E202C70F204469DB00E93709 /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
+		E202C7112044C90500E93709 /* CVCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVCalendarViewController.swift; sourceTree = "<group>"; };
 		E2463358203C721B00ED33DC /* Thrift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thrift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E246335B203C721B00ED33DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E246335D203C721B00ED33DC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 				E2463374203C7AC600ED33DC /* AddItemView.swift */,
 				E2FF3C44203E5437000A46F7 /* ExpensesViewController.swift */,
 				E2986F652040893000766BCA /* CategoriesViewController.swift */,
+				E202C70F204469DB00E93709 /* OverviewViewController.swift */,
+				E202C7112044C90500E93709 /* CVCalendarViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -225,11 +231,15 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Thrift/Pods-Thrift-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CVCalendar/CVCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/CircleProgressView/CircleProgressView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CVCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -263,6 +273,8 @@
 			files = (
 				E2463364203C721B00ED33DC /* Thrift.xcdatamodeld in Sources */,
 				E246335E203C721B00ED33DC /* ViewController.swift in Sources */,
+				E202C710204469DB00E93709 /* OverviewViewController.swift in Sources */,
+				E202C7122044C90500E93709 /* CVCalendarViewController.swift in Sources */,
 				E2986F662040893000766BCA /* CategoriesViewController.swift in Sources */,
 				E246335C203C721B00ED33DC /* AppDelegate.swift in Sources */,
 				E2FF3C45203E5437000A46F7 /* ExpensesViewController.swift in Sources */,
