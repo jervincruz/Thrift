@@ -15,14 +15,14 @@ class AddItemView : ViewController {
     var expenses = [Expense]()
     
     let categories = ["Food", "Auto", "Clothing", "Leisure", "Utilities", "Misc"]
-    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    let days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
-    let years = [2018, 2019, 2020, 2021, 2022]
+    let months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+    let days = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"]
+    let years = ["2018", "2019", "2020", "2021", "2022"]
     
     var selectedCategory : String = ""
-    var selectedMonth : Int = 0
-    var selectedDay : Int = 0
-    var selectedYear : Int = 0
+    var selectedMonth : String = ""
+    var selectedDay : String = ""
+    var selectedYear : String = ""
     
     var expensesViewController = ExpensesViewController()
     
@@ -42,9 +42,9 @@ class AddItemView : ViewController {
         newExpense.name = name
         newExpense.price = price
         newExpense.category = selectedCategory
-        newExpense.month = Int16(selectedMonth)
-        newExpense.day = Int16(selectedDay)
-        newExpense.year = Int16(selectedYear)
+        newExpense.month = selectedMonth
+        newExpense.day = selectedDay
+        newExpense.year = selectedYear
         newExpense.date = saveDate()
         expenses.append(newExpense)
         
@@ -63,11 +63,12 @@ class AddItemView : ViewController {
         
         print("\(month)/\(day)/\(year)")
         
-        // If user chooses current date & category
+      /*  // If user chooses current date & category
         selectedCategory = "Food"
         selectedMonth = month
         selectedDay = day
         selectedYear = year
+      */
 
         monthPicker.selectRow(month - 1, inComponent: 0, animated: true)
         dayPicker.selectRow(day - 1, inComponent: 0, animated: true)
@@ -96,37 +97,8 @@ class AddItemView : ViewController {
     }
     
     func saveDate() -> String {
-        var month : String = ""
         var completeDate : String = ""
-        switch selectedMonth {
-        case 1:
-            month = "January"
-        case 2:
-            month = "February"
-        case 3:
-            month = "March"
-        case 4:
-            month = "April"
-        case 5:
-            month = "May"
-        case 6:
-            month = "June"
-        case 7:
-            month = "July"
-        case 8:
-            month = "August"
-        case 9:
-            month = "September"
-        case 10:
-            month = "October"
-        case 11:
-            month = "November"
-        case 12:
-            month = "December"
-        default:
-            month = "January"
-        }
-        completeDate = "\(selectedDay) \(month), \(selectedYear)"
+        completeDate = "\(selectedDay) \(selectedMonth), \(selectedYear)"
         return completeDate
     }
     
@@ -157,13 +129,13 @@ extension AddItemView : UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView.tag{
         case 0:
-            return "\(categories[row])"
+            return categories[row]
         case 1:
-            return "\(months[row])"
+            return months[row]
         case 2:
-            return "\(days[row])"
+            return days[row]
         case 3:
-            return "\(years[row])"
+            return years[row]
         default: return " "
         }
     }
@@ -174,7 +146,7 @@ extension AddItemView : UIPickerViewDelegate, UIPickerViewDataSource {
             selectedCategory = categories[row]
             print("Category: ", selectedCategory)
         case 1:
-            selectedMonth = row + 1
+            selectedMonth = months[row]
             print("Month: ", selectedMonth)
         case 2:
             selectedDay = days[row]
@@ -192,7 +164,6 @@ extension AddItemView : UIPickerViewDelegate, UIPickerViewDataSource {
         if segue.identifier == "chartsSegue" {
             let vc = segue.destination as! ViewController
             vc.vcContext = context
-            
         }
     }
 

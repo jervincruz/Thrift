@@ -21,40 +21,88 @@ class CVCalendarViewController : UIViewController {
     var price = 0.0
     var category = ""
     
+    var selectedDay = ""
+    var selectedMonth = ""
+    var selectedYear = ""
+    var selectedDate = ""
     
-    private var selectedDay : DayView!
+    private var selectedDayView : DayView!
     var recordsContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var expenses = [Expense]()
-    var selectedDate = ""
 
     override func viewDidLoad(){
         super.viewDidLoad()
         menuView.commitMenuViewUpdate()
         calendarView.commitCalendarViewUpdate()
+        selectedDateConverter()
         loadExpenses()
         
-        selectedDate = selectedDay.date.commonDescription
-        print(selectedDate)
-        print(expenses)
+        //print(expenses)
+    }
+    
+    func saveExpense(){
+        do {
+            try recordsContext.save()
+        } catch {
+            print("Error saving context \(error)")
+        }
     }
     
     func loadExpenses(with request : NSFetchRequest<Expense> = Expense.fetchRequest()){
-        
-        let predicate = NSPredicate(format: "date == %@", selectedDate)
-        request.predicate = predicate
+        let selectedDayPredicate = NSPredicate(format: "date == %@", selectedDate)
+        request.predicate = selectedDayPredicate
         do {
             expenses = try recordsContext.fetch(request)
             for expense in expenses {
+                print("Day:", expense.day!, "Month:", expense.month!, "Year:", expense.year!)
                 name = expense.name!
                 price = expense.price
                 category = expense.category!
-                print("Name: ", expense.name!)
-                print("Price: ", expense.price)
-                print("Category: ", expense.category!)
+                    print("Name:", name, "$:", price, "Category:", category)
+                    print("\(expense.month!)-\(expense.day!)-\(expense.year!)")
             }
         } catch {
             print("Error fetching data from context \(error)")
         }
+    }
+    
+    func selectedDateConverter(){
+        selectedDate = selectedDayView.date.commonDescription
+        print(selectedDate)
+        let dateSeparatedBySpace = selectedDate.replacingOccurrences(of: ",", with: "")
+        let selectedDateArray = dateSeparatedBySpace.components(separatedBy: " ")
+        
+        var selectedDay = selectedDateArray[0].count == 1 ? ("0" + selectedDateArray[0]) : selectedDateArray[0]
+        selectedYear = selectedDateArray[2]
+        switch selectedDateArray[1] {
+            case "January":
+                selectedMonth = "01"
+            case "February":
+                selectedMonth = "02"
+            case "March":
+                selectedMonth = "03"
+            case "April":
+                selectedMonth = "04"
+            case "May":
+                selectedMonth = "05"
+            case "June":
+                selectedMonth = "06"
+            case "July":
+                selectedMonth = "07"
+            case "August":
+                selectedMonth = "08"
+            case "September":
+                selectedMonth = "09"
+            case "October":
+                selectedMonth = "10"
+            case "November":
+                selectedMonth = "11"
+            case "December":
+                selectedMonth = "12"
+            default:
+                selectedMonth = "01"
+        }
+        selectedDate = "\(selectedDay) \(selectedMonth), \(selectedYear)"
     }
     
 }
@@ -71,14 +119,25 @@ extension CVCalendarViewController : UITableViewDelegate, UITableViewDataSource 
         cell.textLabel?.text = expenses[indexPath.row].name!
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            self.recordsContext.delete(self.expenses[indexPath.row])
+            self.expenses.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            self.saveExpense()
+            tableView.reloadData()
+        }
+        return [delete]
+    }
 }
 
 //MARK: - CVCalendar
 extension CVCalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     func didSelectDayView(_ dayView: DayView, animationDidFinish: Bool) {
-        selectedDay = dayView
-        selectedDate = selectedDay.date.commonDescription
-        print(selectedDate)
+        selectedDayView = dayView
+        selectedDate = selectedDayView.date.commonDescription
+        selectedDateConverter()
         loadExpenses()
         
         DispatchQueue.main.async{
@@ -92,7 +151,7 @@ extension CVCalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDe
     }
     
     func firstWeekday() -> Weekday {
-        return Weekday.monday
+        return Weekday.sunday
     }
     
 }

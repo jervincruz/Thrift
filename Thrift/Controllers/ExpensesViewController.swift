@@ -64,9 +64,9 @@ class ExpensesViewController : ViewController, UITableViewDataSource, UITableVie
         let category = expenses[indexPath.row].category!
         let name = expenses[indexPath.row].name!
         let price = expenses[indexPath.row].price
-        let month  = String(expenses[indexPath.row].month)
-        let day = String(expenses[indexPath.row].day)
-        let year = String(expenses[indexPath.row].year)
+        let month  = expenses[indexPath.row].month
+        let day = expenses[indexPath.row].day
+        let year = expenses[indexPath.row].year
         
         if selectedMonth != "" && selectedDay != 0 && selectedYear != 0 {
             if month == selectedMonth && day == String(selectedDay) && year == String(selectedYear) {

@@ -17,6 +17,7 @@
 		E2463366203C721B00ED33DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2463365203C721B00ED33DC /* Assets.xcassets */; };
 		E2463369203C721B00ED33DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2463367203C721B00ED33DC /* LaunchScreen.storyboard */; };
 		E2463375203C7AC600ED33DC /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2463374203C7AC600ED33DC /* AddItemView.swift */; };
+		E282A75D2048963900B54ADB /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E282A75C2048963900B54ADB /* AddItemViewController.swift */; };
 		E2986F662040893000766BCA /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2986F652040893000766BCA /* CategoriesViewController.swift */; };
 		E2FF3C45203E5437000A46F7 /* ExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FF3C44203E5437000A46F7 /* ExpensesViewController.swift */; };
 /* End PBXBuildFile section */
@@ -35,6 +36,7 @@
 		E2463368203C721B00ED33DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E246336A203C721B00ED33DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2463374203C7AC600ED33DC /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
+		E282A75C2048963900B54ADB /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		E2986F652040893000766BCA /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		E2FF3C44203E5437000A46F7 /* ExpensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewController.swift; sourceTree = "<group>"; };
 		F4B6F4B18DFEA502E59D9C58 /* Pods-Thrift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thrift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thrift/Pods-Thrift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				E2986F652040893000766BCA /* CategoriesViewController.swift */,
 				E202C70F204469DB00E93709 /* OverviewViewController.swift */,
 				E202C7112044C90500E93709 /* CVCalendarViewController.swift */,
+				E282A75C2048963900B54ADB /* AddItemViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				E202C710204469DB00E93709 /* OverviewViewController.swift in Sources */,
 				E202C7122044C90500E93709 /* CVCalendarViewController.swift in Sources */,
 				E2986F662040893000766BCA /* CategoriesViewController.swift in Sources */,
+				E282A75D2048963900B54ADB /* AddItemViewController.swift in Sources */,
 				E246335C203C721B00ED33DC /* AppDelegate.swift in Sources */,
 				E2FF3C45203E5437000A46F7 /* ExpensesViewController.swift in Sources */,
 				E2463375203C7AC600ED33DC /* AddItemView.swift in Sources */,
