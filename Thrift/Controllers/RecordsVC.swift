@@ -10,16 +10,18 @@ import UIKit
 import CVCalendar
 import CoreData
 
-class CVCalendarViewController : UIViewController {
+class RecordsVC : UIViewController {
 
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
-    
     @IBOutlet weak var recordsTableView: UITableView!
+    @IBOutlet weak var monthLabel: UILabel!
     
     var name = ""
     var price = 0.0
     var category = ""
+    var date = ""
+    var didAppear = false
     
     var selectedDay = ""
     var selectedMonth = ""
@@ -36,8 +38,7 @@ class CVCalendarViewController : UIViewController {
         calendarView.commitCalendarViewUpdate()
         selectedDateConverter()
         loadExpenses()
-        
-        //print(expenses)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(doSegue))
     }
     
     func saveExpense(){
@@ -48,18 +49,29 @@ class CVCalendarViewController : UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if didAppear{
+        menuView.commitMenuViewUpdate()
+        calendarView.commitCalendarViewUpdate()
+        calendarView.toggleCurrentDayView()
+        selectedDateConverter()
+        loadExpenses()
+        self.recordsTableView.reloadData()
+        }
+        didAppear = true
+    }
+    
     func loadExpenses(with request : NSFetchRequest<Expense> = Expense.fetchRequest()){
         let selectedDayPredicate = NSPredicate(format: "date == %@", selectedDate)
         request.predicate = selectedDayPredicate
         do {
             expenses = try recordsContext.fetch(request)
             for expense in expenses {
-                print("Day:", expense.day!, "Month:", expense.month!, "Year:", expense.year!)
                 name = expense.name!
                 price = expense.price
                 category = expense.category!
-                    print("Name:", name, "$:", price, "Category:", category)
-                    print("\(expense.month!)-\(expense.day!)-\(expense.year!)")
+                date = expense.date!
             }
         } catch {
             print("Error fetching data from context \(error)")
@@ -68,12 +80,11 @@ class CVCalendarViewController : UIViewController {
     
     func selectedDateConverter(){
         selectedDate = selectedDayView.date.commonDescription
-        print(selectedDate)
         let dateSeparatedBySpace = selectedDate.replacingOccurrences(of: ",", with: "")
         let selectedDateArray = dateSeparatedBySpace.components(separatedBy: " ")
-        
-        var selectedDay = selectedDateArray[0].count == 1 ? ("0" + selectedDateArray[0]) : selectedDateArray[0]
+        let selectedDay = selectedDateArray[0].count == 1 ? ("0" + selectedDateArray[0]) : selectedDateArray[0]
         selectedYear = selectedDateArray[2]
+        
         switch selectedDateArray[1] {
             case "January":
                 selectedMonth = "01"
@@ -102,20 +113,28 @@ class CVCalendarViewController : UIViewController {
             default:
                 selectedMonth = "01"
         }
-        selectedDate = "\(selectedDay) \(selectedMonth), \(selectedYear)"
+        self.selectedDate = "\(selectedDay) \(selectedMonth), \(selectedYear)"
     }
-    
 }
 
 //MARK: - Records TableView
 
-extension CVCalendarViewController : UITableViewDelegate, UITableViewDataSource {
+extension RecordsVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return expenses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecordsCell", for: indexPath)
+        
+        cell.transform = CGAffineTransform(translationX: 0, y: 1)
+        cell.alpha = 0
+        
+        UIView.animate(withDuration: 0.5, delay: 0.05*Double(indexPath.row), options: [.curveEaseInOut], animations: {
+            cell.transform = CGAffineTransform(translationX: 0, y: 0)
+            cell.alpha = 1
+        }, completion: nil)
+        
         cell.textLabel?.text = expenses[indexPath.row].name!
         return cell
     }
@@ -130,20 +149,31 @@ extension CVCalendarViewController : UITableViewDelegate, UITableViewDataSource 
         }
         return [delete]
     }
+    
+    @objc func doSegue(){
+        performSegue(withIdentifier: "recordsToAddExpense", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "recordsToAddExpense" {
+            let addExpenseVC = segue.destination as! AddExpenseVC
+            addExpenseVC.selectedDate = selectedDate
+        }
+    }
+
 }
 
 //MARK: - CVCalendar
-extension CVCalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
+extension RecordsVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     func didSelectDayView(_ dayView: DayView, animationDidFinish: Bool) {
         selectedDayView = dayView
         selectedDate = selectedDayView.date.commonDescription
         selectedDateConverter()
         loadExpenses()
-        
+
         DispatchQueue.main.async{
             self.recordsTableView.reloadData()
         }
-    
     }
     
     func presentationMode() -> CalendarMode {
@@ -154,4 +184,54 @@ extension CVCalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDe
         return Weekday.sunday
     }
     
+    func dayLabelWeekdayInTextColor() -> UIColor{
+        return UIColor.white
+    }
+    
+    func presentedDateUpdated(_ date: CVDate) {
+        monthLabel.fadeTransition(0.4)
+        monthLabel.text! = String(date.month)
+        var month = ""
+        switch date.month {
+        case 1:
+            month = "January"
+        case 2:
+            month = "February"
+        case 3:
+            month = "March"
+        case 4:
+            month = "April"
+        case 5:
+            month = "May"
+        case 6:
+            month = "June"
+        case 7:
+            month = "July"
+        case 8:
+            month = "August"
+        case 9:
+            month = "September"
+        case 10:
+            month = "October"
+        case 11:
+            month = "November"
+        case 12:
+            month = "December"
+        default:
+            month = ""
+        }
+        monthLabel.text = "\(month) \(date.year)"
+    }
+}
+
+
+extension UIView {
+    func fadeTransition(_ duration:CFTimeInterval) {
+        let animation = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name:
+            kCAMediaTimingFunctionEaseInEaseOut)
+        animation.type = kCATransitionFade
+        animation.duration = duration
+        layer.add(animation, forKey: kCATransitionFade)
+    }
 }

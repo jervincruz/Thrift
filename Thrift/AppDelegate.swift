@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import HexColors
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

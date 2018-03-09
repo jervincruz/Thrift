@@ -11,11 +11,10 @@ import Charts
 import CoreData
 import CircleProgressView
 
-class OverviewViewController : UIViewController, ChartViewDelegate {
+class OverviewVC : UIViewController, ChartViewDelegate {
     
+    var overviewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]
-    let dollars1 : [Double] = [30, 50, 10, 0, 70, 80, 20]
-    var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var weeklyNumbers : [Double] = []
     var orderedDates = [String]()
     var dateToExpense = [String:Double]()
@@ -31,11 +30,7 @@ class OverviewViewController : UIViewController, ChartViewDelegate {
     var leisure = 0.0
     var misc = 0.0
     var totalCost = 0.0
-    var total = 0.0{
-        didSet{
-            loadCharts()
-        }
-    }
+    var total = 0.0
     
     @IBOutlet weak var lineChartView: LineChartView!
     @IBOutlet weak var foodChart: CircleProgressView!
@@ -61,7 +56,7 @@ class OverviewViewController : UIViewController, ChartViewDelegate {
         /** Load Line Chart First **/
         loadExpenses()
         weeklyData()
-    
+        print(orderedDates)
         /** Load Progress Chart (Week) **/
         let weekPredicate = NSPredicate(format: "date == %@ OR date == %@ OR date == %@ OR date == %@ OR date == %@  OR date == %@ OR date == %@", orderedDates[0], orderedDates[1], orderedDates[2], orderedDates[3], orderedDates[4], orderedDates[5], orderedDates[6])
         loadExpenses(weekPredicate)
@@ -70,24 +65,11 @@ class OverviewViewController : UIViewController, ChartViewDelegate {
     
     func loadExpenses(with request : NSFetchRequest<Expense> = Expense.fetchRequest(), _ predicate : NSPredicate? = nil){
         request.predicate = predicate
-        do{
-            expenses = try context.fetch(request)
+        do {
+            expenses = try overviewContext.fetch(request)
             calculateExpenses()
-        }
-        catch {
+        } catch {
             print("Error fetching data from context \(error)")
-        }
-    }
-    
-    // MARK: - Load Circle Progress View [Day,Week,Year]
-    func loadCharts(){
-        DispatchQueue.main.async{
-            self.foodChart.setProgress(self.food/self.total, animated: true)
-            self.autoChart.setProgress(self.auto/self.total, animated: true)
-            self.utilitiesChart.setProgress(self.utilities/self.total, animated: true)
-            self.clothingChart.setProgress(self.clothing/self.total, animated: true)
-            self.leisureChart.setProgress(self.leisure/self.total, animated: true)
-            self.miscChart.setProgress(self.utilities/self.total, animated: true)
         }
     }
     
@@ -98,7 +80,7 @@ class OverviewViewController : UIViewController, ChartViewDelegate {
         var clothingExpenses = 0.0
         var leisureExpenses = 0.0
         var miscExpenses = 0.0
-        
+
         for expense in expenses {
             switch expense.category {
             case "Food"?:
@@ -125,16 +107,25 @@ class OverviewViewController : UIViewController, ChartViewDelegate {
         }
         totalCost = foodExpenses + autoExpenses + utilitiesExpenses + clothingExpenses + leisureExpenses + miscExpenses
         total = food + auto + utilities + clothing + leisure + misc
-        print("Total:", total)
-        print("Food: \(food) Auto: \(auto) Utilities: \(utilities) Clothing: \(clothing) Leisure: \(leisure) Misc: \(misc)")
+    }
+    
+    
+    // MARK: - Load Circle Progress View [Day,Week,Year]
+    func loadCharts(){
+        DispatchQueue.main.async{
+            self.foodChart.setProgress(self.food/self.total, animated: true)
+            self.autoChart.setProgress(self.auto/self.total, animated: true)
+            self.utilitiesChart.setProgress(self.utilities/self.total, animated: true)
+            self.clothingChart.setProgress(self.clothing/self.total, animated: true)
+            self.leisureChart.setProgress(self.leisure/self.total, animated: true)
+            self.miscChart.setProgress(self.misc/self.total, animated: true)
+        }
     }
     
     /** Create This Week's Days **/
     func dateExpenses(){
         var nextDay = Date().startOfWeek
-        print("IN DATE EXPENSES")
         for _ in 0..<7{
-            print("String:",nextDay!)
             dateToExpense.updateValue(0.0, forKey: String(describing: nextDay!) )
             nextDay = Calendar.current.date(byAdding: .day, value: 1, to: nextDay!)!
         }
@@ -143,39 +134,29 @@ class OverviewViewController : UIViewController, ChartViewDelegate {
     // MARK: - Line Chart
     func weeklyData(){
         var nextDay = Date().startOfWeek
-        print("Start Day:", nextDay!)
+        orderedDates = []
         for _ in 0..<7 {
-            let separatedDate = String(describing: nextDay!).components(separatedBy: " ")
+            let separatedDate = String(describing: nextDay!).components(separatedBy: " ") // "2018-03-01"
             let yearMonthDay = separatedDate[0].components(separatedBy: "-") // ["2018", "03", "01"]
-            let keyYear = separatedDate
             let keyDate = "\(yearMonthDay[2]) \(yearMonthDay[1]), \(yearMonthDay[0])"
             orderedDates.append(keyDate)
-            print(orderedDates)
             nextDay = Calendar.current.date(byAdding: .day, value: 1, to: nextDay!)! // Go to next day
         }
         computeDayTotals()
     }
     
-    
+    // Map Total Expenses For Each Day
     func computeDayTotals(){
         for specificDay in orderedDates{
             weekExpense.updateValue(0.0, forKey: specificDay) // Initialize all days to $0 for each day
         }
         
-        for (key,value) in weekExpense{
-            print("Key:", key)
-        }
-        
         for expense in expenses {
-            print("Expense Date:", expense.date!)
             if orderedDates.contains(expense.date!) {
-                print("YUP IT HAS THE KEY")
-                print("Old Price:", weekExpense[expense.date!]!)
                 weekExpense[expense.date!] = weekExpense[expense.date!]! + expense.price // update price
-                print("New Price:", weekExpense[expense.date!]!)
             }
         }
-        setChartData(days)
+        lineChartData(days)
     }
     
     // MARK: - Toggle Day,Week,Year Chart
@@ -191,34 +172,36 @@ class OverviewViewController : UIViewController, ChartViewDelegate {
             let currentDayNumber = Calendar.current.component(.weekday, from: Date()) - 1
             let date = orderedDates[currentDayNumber]
             let dayPredicate = NSPredicate(format: "date == %@", date)
-            
             loadExpenses(dayPredicate)
+            print(date)
+            print(expenses)
             loadCharts()
         case 1: // Week
             print(orderedDates)
             let weekPredicate = NSPredicate(format: "date == %@ OR date == %@ OR date == %@ OR date == %@ OR date == %@  OR date == %@ OR date == %@", orderedDates[0], orderedDates[1], orderedDates[2], orderedDates[3], orderedDates[4], orderedDates[5], orderedDates[6])
             loadExpenses(weekPredicate)
+            print("Week")
+            print(expenses)
             loadCharts()
         case 2: // Year
-            let yearPredicate = NSPredicate(format: "year = %@", "2018")
+            let year = String(Calendar.current.component(.year, from: Date()))
+            let yearPredicate = NSPredicate(format: "date CONTAINS %@", year)
             loadExpenses(yearPredicate)
+            print("Year", year)
+            print(expenses)
             loadCharts()
         default:
             break;
         }
     }
     
-    
     // Line Chart Data
-    func setChartData(_ days : [String]){
+    func lineChartData(_ days : [String]){
         // 1 - creating an array of data entries
         var yVals1 : [ChartDataEntry] = [ChartDataEntry]()
         
         for i in 0..<days.count{
-            print("ENTERED")
-            print(weekExpense)
             if weekExpense[orderedDates[i]] != nil{
-                print(weekExpense[orderedDates[i]]!)
                 yVals1.append(ChartDataEntry(x: Double(i), y: weekExpense[orderedDates[i]]!))
             }
         }
@@ -226,7 +209,7 @@ class OverviewViewController : UIViewController, ChartViewDelegate {
         // 2 - create a data set with our array
         let set1 : LineChartDataSet = LineChartDataSet(values: yVals1, label: "First Set")
         set1.axisDependency = .left // line will correlate with left axis values
-        set1.setColor(UIColor.blue	.withAlphaComponent(0.5))
+        set1.setColor(UIColor.blue.withAlphaComponent(0.5))
         set1.setCircleColor(UIColor.red)
         set1.lineWidth = 2.0
         set1.circleRadius = 6.0 // the radius of the node circle
@@ -246,6 +229,7 @@ class OverviewViewController : UIViewController, ChartViewDelegate {
         // 5 - finally set our data
         self.lineChartView.data = data
     }
+    
 }
 
 extension Calendar {

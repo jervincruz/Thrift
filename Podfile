@@ -9,5 +9,6 @@ target 'Thrift' do
 	pod 'Charts'
 	pod 'CVCalendar'
 	pod 'CircleProgressView'
+	pod 'HexColors'
 
 end

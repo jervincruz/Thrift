@@ -8,37 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		615AFC99D6BF5236E65A2027 /* Pods_Thrift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 809542957636954DFAEE6F43 /* Pods_Thrift.framework */; };
-		E202C710204469DB00E93709 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202C70F204469DB00E93709 /* OverviewViewController.swift */; };
-		E202C7122044C90500E93709 /* CVCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202C7112044C90500E93709 /* CVCalendarViewController.swift */; };
+		E202C710204469DB00E93709 /* OverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202C70F204469DB00E93709 /* OverviewVC.swift */; };
+		E202C7122044C90500E93709 /* RecordsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202C7112044C90500E93709 /* RecordsVC.swift */; };
+		E233599B204F4F2400229B88 /* AddExpenseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E233599A204F4F2300229B88 /* AddExpenseVC.swift */; };
 		E246335C203C721B00ED33DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246335B203C721B00ED33DC /* AppDelegate.swift */; };
-		E246335E203C721B00ED33DC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246335D203C721B00ED33DC /* ViewController.swift */; };
+		E246335E203C721B00ED33DC /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246335D203C721B00ED33DC /* DashboardVC.swift */; };
 		E2463361203C721B00ED33DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E246335F203C721B00ED33DC /* Main.storyboard */; };
 		E2463364203C721B00ED33DC /* Thrift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E2463362203C721B00ED33DC /* Thrift.xcdatamodeld */; };
 		E2463366203C721B00ED33DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2463365203C721B00ED33DC /* Assets.xcassets */; };
 		E2463369203C721B00ED33DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2463367203C721B00ED33DC /* LaunchScreen.storyboard */; };
-		E2463375203C7AC600ED33DC /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2463374203C7AC600ED33DC /* AddItemView.swift */; };
-		E282A75D2048963900B54ADB /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E282A75C2048963900B54ADB /* AddItemViewController.swift */; };
-		E2986F662040893000766BCA /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2986F652040893000766BCA /* CategoriesViewController.swift */; };
-		E2FF3C45203E5437000A46F7 /* ExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FF3C44203E5437000A46F7 /* ExpensesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		64A814890C871C37471A0849 /* Pods-Thrift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thrift.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thrift/Pods-Thrift.release.xcconfig"; sourceTree = "<group>"; };
 		809542957636954DFAEE6F43 /* Pods_Thrift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thrift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E202C70F204469DB00E93709 /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
-		E202C7112044C90500E93709 /* CVCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVCalendarViewController.swift; sourceTree = "<group>"; };
+		E202C70F204469DB00E93709 /* OverviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewVC.swift; sourceTree = "<group>"; };
+		E202C7112044C90500E93709 /* RecordsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsVC.swift; sourceTree = "<group>"; };
+		E233599A204F4F2300229B88 /* AddExpenseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseVC.swift; sourceTree = "<group>"; };
 		E2463358203C721B00ED33DC /* Thrift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thrift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E246335B203C721B00ED33DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E246335D203C721B00ED33DC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E246335D203C721B00ED33DC /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		E2463360203C721B00ED33DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E2463363203C721B00ED33DC /* Thrift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Thrift.xcdatamodel; sourceTree = "<group>"; };
 		E2463365203C721B00ED33DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2463368203C721B00ED33DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E246336A203C721B00ED33DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E2463374203C7AC600ED33DC /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
-		E282A75C2048963900B54ADB /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
-		E2986F652040893000766BCA /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
-		E2FF3C44203E5437000A46F7 /* ExpensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewController.swift; sourceTree = "<group>"; };
 		F4B6F4B18DFEA502E59D9C58 /* Pods-Thrift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thrift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thrift/Pods-Thrift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,13 +99,10 @@
 		E2463371203C73BD00ED33DC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E246335D203C721B00ED33DC /* ViewController.swift */,
-				E2463374203C7AC600ED33DC /* AddItemView.swift */,
-				E2FF3C44203E5437000A46F7 /* ExpensesViewController.swift */,
-				E2986F652040893000766BCA /* CategoriesViewController.swift */,
-				E202C70F204469DB00E93709 /* OverviewViewController.swift */,
-				E202C7112044C90500E93709 /* CVCalendarViewController.swift */,
-				E282A75C2048963900B54ADB /* AddItemViewController.swift */,
+				E246335D203C721B00ED33DC /* DashboardVC.swift */,
+				E202C70F204469DB00E93709 /* OverviewVC.swift */,
+				E202C7112044C90500E93709 /* RecordsVC.swift */,
+				E233599A204F4F2300229B88 /* AddExpenseVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -237,12 +228,14 @@
 				"${BUILT_PRODUCTS_DIR}/CVCalendar/CVCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CircleProgressView/CircleProgressView.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors/HexColors.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CVCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -274,15 +267,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E233599B204F4F2400229B88 /* AddExpenseVC.swift in Sources */,
 				E2463364203C721B00ED33DC /* Thrift.xcdatamodeld in Sources */,
-				E246335E203C721B00ED33DC /* ViewController.swift in Sources */,
-				E202C710204469DB00E93709 /* OverviewViewController.swift in Sources */,
-				E202C7122044C90500E93709 /* CVCalendarViewController.swift in Sources */,
-				E2986F662040893000766BCA /* CategoriesViewController.swift in Sources */,
-				E282A75D2048963900B54ADB /* AddItemViewController.swift in Sources */,
+				E246335E203C721B00ED33DC /* DashboardVC.swift in Sources */,
+				E202C710204469DB00E93709 /* OverviewVC.swift in Sources */,
+				E202C7122044C90500E93709 /* RecordsVC.swift in Sources */,
 				E246335C203C721B00ED33DC /* AppDelegate.swift in Sources */,
-				E2FF3C45203E5437000A46F7 /* ExpensesViewController.swift in Sources */,
-				E2463375203C7AC600ED33DC /* AddItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
