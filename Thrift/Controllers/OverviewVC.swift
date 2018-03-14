@@ -57,7 +57,9 @@ class OverviewVC : UIViewController, ChartViewDelegate {
         loadExpenses()
         weeklyData()
         print(orderedDates)
+        
         /** Load Progress Chart (Week) **/
+        resetCategoryValues()
         let weekPredicate = NSPredicate(format: "date == %@ OR date == %@ OR date == %@ OR date == %@ OR date == %@  OR date == %@ OR date == %@", orderedDates[0], orderedDates[1], orderedDates[2], orderedDates[3], orderedDates[4], orderedDates[5], orderedDates[6])
         loadExpenses(weekPredicate)
         loadCharts()
@@ -228,6 +230,17 @@ class OverviewVC : UIViewController, ChartViewDelegate {
         
         // 5 - finally set our data
         self.lineChartView.data = data
+    }
+    
+    func resetCategoryValues(){
+        food = 0.0
+        auto = 0.0
+        utilities = 0.0
+        clothing = 0.0
+        leisure = 0.0
+        misc = 0.0
+        totalCost = 0.0
+        total = 0.0
     }
     
 }

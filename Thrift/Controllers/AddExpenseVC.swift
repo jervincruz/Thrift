@@ -31,6 +31,7 @@ class AddExpenseVC : UIViewController {
     
     
     var selectedCategory : String?
+    var selectedName : String?
     var selectedDate : String?
     var selectedPrice : String = ""
     
@@ -56,7 +57,7 @@ class AddExpenseVC : UIViewController {
         DispatchQueue.main.asyncAfter(deadline: when) {
             alertController.dismiss(animated: true, completion: nil)
         }
-        guard let name = nameTextField.text else {
+        guard let name = nameTextField.text, !name.isEmpty else {
             self.present(alertController, animated: true, completion: nil)
             return
         }

@@ -17,6 +17,7 @@
 		E2463364203C721B00ED33DC /* Thrift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E2463362203C721B00ED33DC /* Thrift.xcdatamodeld */; };
 		E2463366203C721B00ED33DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2463365203C721B00ED33DC /* Assets.xcassets */; };
 		E2463369203C721B00ED33DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2463367203C721B00ED33DC /* LaunchScreen.storyboard */; };
+		E249B87820598DEB0020D2A0 /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E249B87720598DEB0020D2A0 /* TestVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		E2463365203C721B00ED33DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2463368203C721B00ED33DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E246336A203C721B00ED33DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E249B87720598DEB0020D2A0 /* TestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
 		F4B6F4B18DFEA502E59D9C58 /* Pods-Thrift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thrift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thrift/Pods-Thrift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +105,7 @@
 				E202C70F204469DB00E93709 /* OverviewVC.swift */,
 				E202C7112044C90500E93709 /* RecordsVC.swift */,
 				E233599A204F4F2300229B88 /* AddExpenseVC.swift */,
+				E249B87720598DEB0020D2A0 /* TestVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				E202C710204469DB00E93709 /* OverviewVC.swift in Sources */,
 				E202C7122044C90500E93709 /* RecordsVC.swift in Sources */,
 				E246335C203C721B00ED33DC /* AppDelegate.swift in Sources */,
+				E249B87820598DEB0020D2A0 /* TestVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,6 +28,9 @@ class DashboardVC: UIViewController {
     
     var vcContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var vcExpenses = [Expense]()
+    var barItemPressed = true
+    var recordsHidden = true
+    var graphHidden = true
     
     let date = Date()
     let dateFormatter = DateFormatter()
@@ -44,22 +47,29 @@ class DashboardVC: UIViewController {
     @IBOutlet weak var miscChart: CircleProgressView!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    
+    @IBOutlet weak var recordsButton: UIButton!
+    @IBOutlet weak var graphButton: UIButton!
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
+
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         getDate()
         print(monthYear!)
         loadExpenses()
-        navigationController?.navigationBar.tintColor = UIColor("38464F") //CBE4D1
+    navigationController?.navigationBar.tintColor = UIColor("38464F")
         navigationController?.navigationBar.backgroundColor = UIColor("CBE4D1")
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor("38464F")]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor("38464F")!]
     }
 
     override func viewWillAppear(_ animated: Bool) {
         // When navigating back from other controllers
         loadExpenses()
         display()
+    }
+    
+    @IBAction func menuBarItem(_ sender: UIBarButtonItem) {
+        
     }
 
     func loadExpenses(with request : NSFetchRequest<Expense> = Expense.fetchRequest()){
