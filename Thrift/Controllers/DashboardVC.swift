@@ -47,29 +47,18 @@ class DashboardVC: UIViewController {
     @IBOutlet weak var miscChart: CircleProgressView!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var recordsButton: UIButton!
-    @IBOutlet weak var graphButton: UIButton!
-    @IBOutlet weak var visualEffectView: UIVisualEffectView!
 
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         getDate()
-        print(monthYear!)
         loadExpenses()
-    navigationController?.navigationBar.tintColor = UIColor("38464F")
-        navigationController?.navigationBar.backgroundColor = UIColor("CBE4D1")
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor("38464F")!]
     }
 
     override func viewWillAppear(_ animated: Bool) {
         // When navigating back from other controllers
         loadExpenses()
         display()
-    }
-    
-    @IBAction func menuBarItem(_ sender: UIBarButtonItem) {
-        
     }
 
     func loadExpenses(with request : NSFetchRequest<Expense> = Expense.fetchRequest()){
@@ -78,9 +67,6 @@ class DashboardVC: UIViewController {
         do {
             vcExpenses = try vcContext.fetch(request)
             calculateExpenses()
-            for expense in vcExpenses{
-                print("\(String(describing: expense.name!)) | \(String(describing: expense.category!)) | \(String(describing: expense.date!))")
-            }
         } catch {
             print("Error fetching data from context \(error)")
         }

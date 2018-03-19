@@ -31,7 +31,7 @@ public final class CVCalendarViewAppearance: NSObject {
 
     /// Default text color.
     public var dayLabelWeekdayDisabledColor: UIColor? = .gray
-    public var dayLabelWeekdayInTextColor: UIColor? = .black
+    public var dayLabelWeekdayInTextColor: UIColor? = .white
     public var dayLabelWeekdayOutTextColor: UIColor? = .gray
     public var dayLabelWeekdayHighlightedTextColor: UIColor? = .white
     public var dayLabelWeekdaySelectedTextColor: UIColor? = .white

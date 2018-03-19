@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import HexColors
 
-class AddExpenseVC : UIViewController {
+class AddExpenseVC : UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var nineButton: UIButton!
     @IBOutlet weak var eightButton: UIButton!
@@ -41,23 +41,21 @@ class AddExpenseVC : UIViewController {
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        // [Navigation Bar] -> Add Expense Button
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addExpense))
-                
-        // Make Rounded Buttons
         for button in priceButtons {
-            makeButtonRound(button)
+            makeButtonRound(button) // Make Rounded Buttons
         }
+        self.nameTextField.autocapitalizationType = .words
+        self.hideKeyboard()
     }
 
-    @objc func addExpense(){
+    @IBAction func addExpense(){
         // Error handling when no category, name, price, input
         let alertController = UIAlertController(title: "Incomplete", message: "Missing Required Fields!", preferredStyle: .alert)
         let when = DispatchTime.now() + 1.5
         DispatchQueue.main.asyncAfter(deadline: when) {
             alertController.dismiss(animated: true, completion: nil)
         }
-        guard let name = nameTextField.text, !name.isEmpty else {
+        guard let name = nameTextField.text, !name.isEmpty, name.count < 100 else {
             self.present(alertController, animated: true, completion: nil)
             return
         }
@@ -100,11 +98,6 @@ class AddExpenseVC : UIViewController {
     func loadExpenses(with request : NSFetchRequest<Expense> = Expense.fetchRequest()){
         do{
             expenses = try context.fetch(request)
-            for expense in expenses{
-                let name = expense.name!
-                let category = expense.category!
-                let price = expense.price
-            }
         } catch {
             print("Error fetching data from context \(error)")
         }
@@ -112,12 +105,16 @@ class AddExpenseVC : UIViewController {
     
     @IBAction func priceButtonPressed(_ sender: UIButton) {
         let decimal : Character = "."
-        
+        // Protects multiple decimals
         if let index = selectedPrice.index(of: decimal) {
             let pos = selectedPrice.distance(from: selectedPrice.endIndex, to: index)
             if pos == -3 && sender.tag != 11 {
                 return
             }
+        }
+        // Protects infinite numbers
+        if selectedPrice.count >= 18 && sender.tag != 11 {
+            return
         }
 
         switch sender.tag {
@@ -208,4 +205,21 @@ class AddExpenseVC : UIViewController {
         category.backgroundColor = UIColor.white
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if self.nameTextField.isFirstResponder {
+            self.nameTextField.resignFirstResponder()
+        }
+        return true
+    }
+}
+
+extension UIViewController {
+    func hideKeyboard(){
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard(){
+        view.endEditing(true)
+    }
 }

@@ -21,7 +21,7 @@ class RecordsVC : UIViewController {
     var price = 0.0
     var category = ""
     var date = ""
-    var didAppear = false
+    var viewAppeared = false
     
     var selectedDay = ""
     var selectedMonth = ""
@@ -34,11 +34,13 @@ class RecordsVC : UIViewController {
 
     override func viewDidLoad(){
         super.viewDidLoad()
+        loadExpenses()
+    }
+    
+    override func viewDidLayoutSubviews() {
         menuView.commitMenuViewUpdate()
         calendarView.commitCalendarViewUpdate()
-        selectedDateConverter()
-        loadExpenses()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(doSegue))
+        calendarView.setNeedsUpdateConstraints()
     }
     
     func saveExpense(){
@@ -48,18 +50,18 @@ class RecordsVC : UIViewController {
             print("Error saving context \(error)")
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        if didAppear{
-        menuView.commitMenuViewUpdate()
-        calendarView.commitCalendarViewUpdate()
-        calendarView.toggleCurrentDayView()
-        selectedDateConverter()
-        loadExpenses()
-        self.recordsTableView.reloadData()
+        if viewAppeared{
+            menuView.commitMenuViewUpdate()
+            calendarView.commitCalendarViewUpdate()
+            calendarView.toggleCurrentDayView()
+            selectedDateConverter()
+            loadExpenses()
+            self.recordsTableView.reloadData()
         }
-        didAppear = true
+        viewAppeared = true
     }
     
     func loadExpenses(with request : NSFetchRequest<Expense> = Expense.fetchRequest()){
@@ -125,7 +127,7 @@ extension RecordsVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RecordsCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RecordsCell", for: indexPath) as! RecordsTVCell
         
         cell.transform = CGAffineTransform(translationX: 0, y: 1)
         cell.alpha = 0
@@ -135,7 +137,26 @@ extension RecordsVC : UITableViewDelegate, UITableViewDataSource {
             cell.alpha = 1
         }, completion: nil)
         
-        cell.textLabel?.text = expenses[indexPath.row].name!
+        switch expenses[indexPath.row].category {
+        case "Food"?:
+            cell.recordImage.image = UIImage(named: "foodBlue")
+        case "Auto"?:
+            cell.recordImage.image = UIImage(named: "autoBlue")
+        case "Utilities"?:
+            cell.recordImage.image = UIImage(named: "utilitiesBlue")
+        case "Clothing"?:
+            cell.recordImage.image = UIImage(named: "clothingBlue")
+        case "Leisure"?:
+            cell.recordImage.image = UIImage(named: "leisureBlue")
+        case "Misc"?:
+            cell.recordImage.image = UIImage(named: "miscBlue")
+        default:
+            cell.recordImage.image = UIImage(named: "foodBlue")
+        }
+        
+        cell.recordName.text = expenses[indexPath.row].name!
+        cell.recordPrice.text = expenses[indexPath.row].price > 99999.99 ? "$ 100k+  " : " $ \(String(format: "%.2f", expenses[indexPath.row].price))"
+        
         return cell
     }
     
@@ -148,10 +169,6 @@ extension RecordsVC : UITableViewDelegate, UITableViewDataSource {
             tableView.reloadData()
         }
         return [delete]
-    }
-    
-    @objc func doSegue(){
-        performSegue(withIdentifier: "recordsToAddExpense", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -182,10 +199,6 @@ extension RecordsVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     
     func firstWeekday() -> Weekday {
         return Weekday.sunday
-    }
-    
-    func dayLabelWeekdayInTextColor() -> UIColor{
-        return UIColor.white
     }
     
     func presentedDateUpdated(_ date: CVDate) {

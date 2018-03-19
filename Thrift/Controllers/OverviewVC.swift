@@ -45,7 +45,6 @@ class OverviewVC : UIViewController, ChartViewDelegate {
         super.viewDidLoad()
         
         self.lineChartView.delegate = self
-        self.lineChartView.chartDescription?.text! = "Tap node for details"
         self.lineChartView.chartDescription?.textColor = UIColor.white
         self.lineChartView.gridBackgroundColor = UIColor.darkGray
         self.lineChartView.noDataText = "No data provided"
@@ -114,6 +113,7 @@ class OverviewVC : UIViewController, ChartViewDelegate {
     
     // MARK: - Load Circle Progress View [Day,Week,Year]
     func loadCharts(){
+        if total == 0 { total = 1 } // No Expenses, Catch Divide by Zero
         DispatchQueue.main.async{
             self.foodChart.setProgress(self.food/self.total, animated: true)
             self.autoChart.setProgress(self.auto/self.total, animated: true)
@@ -152,7 +152,6 @@ class OverviewVC : UIViewController, ChartViewDelegate {
         for specificDay in orderedDates{
             weekExpense.updateValue(0.0, forKey: specificDay) // Initialize all days to $0 for each day
         }
-        
         for expense in expenses {
             if orderedDates.contains(expense.date!) {
                 weekExpense[expense.date!] = weekExpense[expense.date!]! + expense.price // update price
@@ -162,6 +161,7 @@ class OverviewVC : UIViewController, ChartViewDelegate {
     }
     
     // MARK: - Toggle Day,Week,Year Chart
+    
     @IBAction func controlTriggered(_ sender: UISegmentedControl) {
         food = 0.0
         auto = 0.0
@@ -175,22 +175,25 @@ class OverviewVC : UIViewController, ChartViewDelegate {
             let date = orderedDates[currentDayNumber]
             let dayPredicate = NSPredicate(format: "date == %@", date)
             loadExpenses(dayPredicate)
-            print(date)
-            print(expenses)
+            print(expenses.isEmpty)
+            print("Auto:", autoChart.progress, "Utilities:", utilitiesChart.progress)
+            autoChart.setProgress(0, animated: true)
             loadCharts()
+               print("Auto:", autoChart.progress, "Utilities:", utilitiesChart.progress)
         case 1: // Week
             print(orderedDates)
             let weekPredicate = NSPredicate(format: "date == %@ OR date == %@ OR date == %@ OR date == %@ OR date == %@  OR date == %@ OR date == %@", orderedDates[0], orderedDates[1], orderedDates[2], orderedDates[3], orderedDates[4], orderedDates[5], orderedDates[6])
             loadExpenses(weekPredicate)
             print("Week")
-            print(expenses)
+//            print(expenses)
             loadCharts()
+            print("Auto:", auto, "Utilities:", utilities)
         case 2: // Year
             let year = String(Calendar.current.component(.year, from: Date()))
             let yearPredicate = NSPredicate(format: "date CONTAINS %@", year)
             loadExpenses(yearPredicate)
             print("Year", year)
-            print(expenses)
+//            print(expenses)
             loadCharts()
         default:
             break;
@@ -209,15 +212,15 @@ class OverviewVC : UIViewController, ChartViewDelegate {
         }
         
         // 2 - create a data set with our array
-        let set1 : LineChartDataSet = LineChartDataSet(values: yVals1, label: "First Set")
+        let set1 : LineChartDataSet = LineChartDataSet(values: yVals1, label: "")
         set1.axisDependency = .left // line will correlate with left axis values
-        set1.setColor(UIColor.blue.withAlphaComponent(0.5))
+        set1.setColor((UIColor("CBE4D1")?.withAlphaComponent(0.5))!)
         set1.setCircleColor(UIColor.red)
         set1.lineWidth = 2.0
         set1.circleRadius = 6.0 // the radius of the node circle
         set1.fillAlpha = 65 / 255.0
         set1.fillColor = UIColor.red
-        set1.highlightColor = UIColor.white
+        set1.highlightColor = UIColor("38464F")!
         set1.drawCircleHoleEnabled = true
         
         // 3 - create an array to store our LineChartDataSet
@@ -227,8 +230,14 @@ class OverviewVC : UIViewController, ChartViewDelegate {
         // 4 - pass our months in for our x-axis label value along with our datasets
         let data : LineChartData = LineChartData(dataSets: dataSets)
         data.setValueTextColor(UIColor.white)
-        
+ 
         // 5 - finally set our data
+        lineChartView.chartDescription?.enabled = false
+        lineChartView.legend.enabled = false
+        lineChartView.xAxis.labelTextColor = UIColor("CBE4D1")!
+        lineChartView.leftAxis.labelTextColor = UIColor("CBE4D1")!
+
+        
         self.lineChartView.data = data
     }
     
