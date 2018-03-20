@@ -55,7 +55,6 @@ class OverviewVC : UIViewController, ChartViewDelegate {
         /** Load Line Chart First **/
         loadExpenses()
         weeklyData()
-        print(orderedDates)
         
         /** Load Progress Chart (Week) **/
         resetCategoryValues()
@@ -70,7 +69,7 @@ class OverviewVC : UIViewController, ChartViewDelegate {
             expenses = try overviewContext.fetch(request)
             calculateExpenses()
         } catch {
-            print("Error fetching data from context \(error)")
+            fatalError("Error fetching expenses \(error)")
         }
     }
     
@@ -163,37 +162,22 @@ class OverviewVC : UIViewController, ChartViewDelegate {
     // MARK: - Toggle Day,Week,Year Chart
     
     @IBAction func controlTriggered(_ sender: UISegmentedControl) {
-        food = 0.0
-        auto = 0.0
-        utilities = 0.0
-        clothing = 0.0
-        leisure = 0.0
-        misc = 0.0
+        resetCategoryValues()
         switch chartControl.selectedSegmentIndex{
         case 0: // Day
             let currentDayNumber = Calendar.current.component(.weekday, from: Date()) - 1
             let date = orderedDates[currentDayNumber]
             let dayPredicate = NSPredicate(format: "date == %@", date)
             loadExpenses(dayPredicate)
-            print(expenses.isEmpty)
-            print("Auto:", autoChart.progress, "Utilities:", utilitiesChart.progress)
-            autoChart.setProgress(0, animated: true)
             loadCharts()
-               print("Auto:", autoChart.progress, "Utilities:", utilitiesChart.progress)
         case 1: // Week
-            print(orderedDates)
             let weekPredicate = NSPredicate(format: "date == %@ OR date == %@ OR date == %@ OR date == %@ OR date == %@  OR date == %@ OR date == %@", orderedDates[0], orderedDates[1], orderedDates[2], orderedDates[3], orderedDates[4], orderedDates[5], orderedDates[6])
             loadExpenses(weekPredicate)
-            print("Week")
-//            print(expenses)
             loadCharts()
-            print("Auto:", auto, "Utilities:", utilities)
         case 2: // Year
             let year = String(Calendar.current.component(.year, from: Date()))
             let yearPredicate = NSPredicate(format: "date CONTAINS %@", year)
             loadExpenses(yearPredicate)
-            print("Year", year)
-//            print(expenses)
             loadCharts()
         default:
             break;
@@ -237,7 +221,6 @@ class OverviewVC : UIViewController, ChartViewDelegate {
         lineChartView.xAxis.labelTextColor = UIColor("CBE4D1")!
         lineChartView.leftAxis.labelTextColor = UIColor("CBE4D1")!
 
-        
         self.lineChartView.data = data
     }
     

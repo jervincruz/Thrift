@@ -47,7 +47,7 @@ class RecordsVC : UIViewController {
         do {
             try recordsContext.save()
         } catch {
-            print("Error saving context \(error)")
+            fatalError("Error saving expenses \(error)")
         }
     }
 
@@ -76,7 +76,7 @@ class RecordsVC : UIViewController {
                 date = expense.date!
             }
         } catch {
-            print("Error fetching data from context \(error)")
+            fatalError("Error fetching expenses \(error)")
         }
     }
     
@@ -155,7 +155,7 @@ extension RecordsVC : UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.recordName.text = expenses[indexPath.row].name!
-        cell.recordPrice.text = expenses[indexPath.row].price > 99999.99 ? "$ 100k+  " : " $ \(String(format: "%.2f", expenses[indexPath.row].price))"
+        cell.recordPrice.text = expenses[indexPath.row].price > 99999.99 ? "$ 100k+ " : " $ \(String(format: "%.2f", expenses[indexPath.row].price))"
         
         return cell
     }

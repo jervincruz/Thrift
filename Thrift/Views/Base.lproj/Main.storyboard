@@ -1237,13 +1237,13 @@
                                                                         <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
-                                                                        <real key="value" value="2"/>
+                                                                        <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
                                                                         <color key="value" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
-                                                                        <real key="value" value="7"/>
+                                                                        <real key="value" value="10"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="trackBackgroundColor">
@@ -1278,13 +1278,13 @@
                                                                         <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
-                                                                        <real key="value" value="2"/>
+                                                                        <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
                                                                         <color key="value" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
-                                                                        <real key="value" value="7"/>
+                                                                        <real key="value" value="10"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="trackBackgroundColor">
@@ -1331,13 +1331,13 @@
                                                                         <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
-                                                                        <real key="value" value="2"/>
+                                                                        <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
                                                                         <color key="value" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
-                                                                        <real key="value" value="7"/>
+                                                                        <real key="value" value="10"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="trackBackgroundColor">
@@ -1372,13 +1372,13 @@
                                                                         <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
-                                                                        <real key="value" value="2"/>
+                                                                        <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
                                                                         <color key="value" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
-                                                                        <real key="value" value="7"/>
+                                                                        <real key="value" value="10"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="trackBackgroundColor">
@@ -1413,13 +1413,13 @@
                                                                         <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
-                                                                        <real key="value" value="2"/>
+                                                                        <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
                                                                         <color key="value" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
-                                                                        <real key="value" value="7"/>
+                                                                        <real key="value" value="10"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="trackBackgroundColor">
@@ -1546,7 +1546,7 @@
                                 <rect key="frame" x="0.0" y="209" width="375" height="362"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dHR-Mz-9bA">
-                                        <rect key="frame" x="83" y="20.5" width="210" height="320"/>
+                                        <rect key="frame" x="83" y="21" width="210" height="320"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="983-Dt-2zc">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="320"/>
@@ -1574,6 +1574,12 @@
                                                             <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
                                                                 <color key="value" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j3V-8j-OfG" customClass="CircleProgressView" customModule="CircleProgressView">
@@ -1599,6 +1605,12 @@
                                                             <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
                                                                 <color key="value" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="woe-2d-ShW" customClass="CircleProgressView" customModule="CircleProgressView">
@@ -1623,6 +1635,12 @@
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
                                                                 <color key="value" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                                                <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
@@ -1668,6 +1686,12 @@
                                                             <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
                                                                 <color key="value" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rMA-PK-Obn" customClass="CircleProgressView" customModule="CircleProgressView">
@@ -1693,6 +1717,12 @@
                                                             <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
                                                                 <color key="value" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n92-X7-sbr" customClass="CircleProgressView" customModule="CircleProgressView">
@@ -1717,6 +1747,12 @@
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
                                                                 <color key="value" red="0.7975731492" green="0.89464515450000004" blue="0.82102376219999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                                                <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>

@@ -51,7 +51,7 @@ class DashboardVC: UIViewController {
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        getDate()
+        getCurrentMonthYear()
         loadExpenses()
     }
 
@@ -68,7 +68,7 @@ class DashboardVC: UIViewController {
             vcExpenses = try vcContext.fetch(request)
             calculateExpenses()
         } catch {
-            print("Error fetching data from context \(error)")
+            fatalError("Error fetching expenses \(error)")
         }
     }
     
@@ -142,7 +142,7 @@ class DashboardVC: UIViewController {
         }
     }
     
-    func getDate(){
+    func getCurrentMonthYear(){
         dateFormatter.dateFormat = "LLLL"
         nameOfMonth = dateFormatter.string(from: date)
         month = String(Calendar.current.component(.month, from: date))

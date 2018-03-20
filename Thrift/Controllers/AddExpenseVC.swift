@@ -29,7 +29,6 @@ class AddExpenseVC : UIViewController, UITextFieldDelegate {
     @IBOutlet var categoryButtons: [UIButton]!
     @IBOutlet weak var nameTextField: UITextField!
     
-    
     var selectedCategory : String?
     var selectedName : String?
     var selectedDate : String?
@@ -42,7 +41,7 @@ class AddExpenseVC : UIViewController, UITextFieldDelegate {
     override func viewDidLoad(){
         super.viewDidLoad()
         for button in priceButtons {
-            makeButtonRound(button) // Make Rounded Buttons
+            button.layer.cornerRadius = button.frame.width / 2 // Make Circle Buttons
         }
         self.nameTextField.autocapitalizationType = .words
         self.hideKeyboard()
@@ -91,7 +90,7 @@ class AddExpenseVC : UIViewController, UITextFieldDelegate {
         do {
             try context.save()
         } catch {
-            print("Error saving context \(error)")
+            fatalError("Error saving expenses \(error)")
         }
     }
     
@@ -99,20 +98,20 @@ class AddExpenseVC : UIViewController, UITextFieldDelegate {
         do{
             expenses = try context.fetch(request)
         } catch {
-            print("Error fetching data from context \(error)")
+            fatalError("Error fetching expenses \(error)")
         }
     }
     
     @IBAction func priceButtonPressed(_ sender: UIButton) {
         let decimal : Character = "."
-        // Protects multiple decimals
+        // Protects prices exceeding 2 decimal places
         if let index = selectedPrice.index(of: decimal) {
             let pos = selectedPrice.distance(from: selectedPrice.endIndex, to: index)
             if pos == -3 && sender.tag != 11 {
                 return
             }
         }
-        // Protects infinite numbers
+        // Protects infinite numbers (Max: 18 Digits)
         if selectedPrice.count >= 18 && sender.tag != 11 {
             return
         }
@@ -120,57 +119,38 @@ class AddExpenseVC : UIViewController, UITextFieldDelegate {
         switch sender.tag {
         case 0:
             selectedPrice += "0"
-            showPriceLabel()
         case 1:
             selectedPrice += "1"
-            showPriceLabel()
         case 2:
             selectedPrice += "2"
-            showPriceLabel()
         case 3:
             selectedPrice += "3"
-            showPriceLabel()
         case 4:
             selectedPrice += "4"
-            showPriceLabel()
         case 5:
             selectedPrice += "5"
-            showPriceLabel()
         case 6:
             selectedPrice += "6"
-            showPriceLabel()
         case 7:
             selectedPrice += "7"
-            showPriceLabel()
         case 8:
             selectedPrice += "8"
-            showPriceLabel()
         case 9:
             selectedPrice += "9"
-            showPriceLabel()
         case 10:
             if selectedPrice.contains("."){
                 return
             } else { selectedPrice += "." }
-            showPriceLabel()
         case 11:
             if selectedPrice.count > 0 {
                 selectedPrice = String(selectedPrice.dropLast())
             }
-            showPriceLabel()
         default:
             return
         }
-    }
-    
-    func showPriceLabel(){
         DispatchQueue.main.async{
             self.priceLabel.text! = "$ " + self.selectedPrice
         }
-    }
-    
-    func makeButtonRound(_ myBtn : UIButton){
-        myBtn.layer.cornerRadius = myBtn.frame.width / 2
     }
     
     @IBAction func categoryPressed(category: UIButton){
@@ -206,10 +186,8 @@ class AddExpenseVC : UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if self.nameTextField.isFirstResponder {
-            self.nameTextField.resignFirstResponder()
-        }
-        return true
+        view.endEditing(true)
+        return false
     }
 }
 
