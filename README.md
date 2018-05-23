@@ -8,3 +8,8 @@ APIs: iOS Charts, CalendarCV <br />
 Data Persistence / Storage: Core Data <br />
 Platform: All iPhones & iPads <br />
 
+![Screenshot](5.8-inch Screenshot 2.png)
+![Screenshot](5.8-inch Screenshot 3.png)
+![Screenshot](5.8-inch Screenshot 4.png)
+![Screenshot](5.8-inch Screenshot 5.png)
+
