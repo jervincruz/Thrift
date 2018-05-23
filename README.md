@@ -10,4 +10,5 @@ Platform: All iPhones & iPads <br />
 
 ![alt tag](https://lh3.googleusercontent.com/TOQoEDf3XcCUAsVbFtgK766yYetd_YS7fX_DtXAQA-d2fzUYctIZjZMdgcOljYb3UfAvXk-4MzHupqc2kalo=w1202-h569-rw)
 ![alt tag](https://lh5.googleusercontent.com/BxJrUVpHdJlTsAVvyvhkEOSmQV90U35kXjZyVIdBuJTRPl8A_7UqRY__0jc6k_K8UwMy1O5j_AniF98mjo9y=w1202-h569-rw)
-![alt tag](https://drive.google.com/open?id=1GbdO1Z7W-yP0E6b2eEv44ZNTV_4roV6d)
+![alt tag](https://lh3.googleusercontent.com/0Uf-1aFGI-77FAhgzx5WSGYKpr-zbEVJphmPnnuqXyv4__ZTleU0UbrJwSHcMBgDNWtyHojJ6mM0tti2tiT3=w1202-h569-rw)
+![alt tag](https://lh6.googleusercontent.com/dHACSPKZBvH4CgdHIoKaFh2PAx5yMxxBa-ODw_7o5M9ldc4uSOuRb8ziQpK7Hgdm-tPz85QHQe1WKF558tpO=w1202-h569-rw)
